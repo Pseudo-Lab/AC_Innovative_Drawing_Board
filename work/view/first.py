@@ -1,5 +1,7 @@
 from PySide6 import QtWidgets, QtCore
 
+from config import setting
+
 
 class First(QtWidgets.QGraphicsView):
     screen_rect = None  # 화면에 보여지는 이미지 사각형 크기
@@ -13,7 +15,10 @@ class First(QtWidgets.QGraphicsView):
         self.setScene(self.scene)
 
     def setup(self):
-        self.screen_rect: QtCore.QRectF = QtCore.QRectF(0.0, 0.0, 600, 500)
+        self.screen_rect: QtCore.QRectF = QtCore.QRectF(0.0, 0.0,
+                                                        setting.VIEW_DEFAULT_WIDTH,
+                                                        setting.VIEW_DEFAULT_HEIGHT)
+
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
 
 

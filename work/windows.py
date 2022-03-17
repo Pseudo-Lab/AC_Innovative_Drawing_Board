@@ -1,6 +1,8 @@
 from PySide6 import QtCore
 from PySide6.QtWidgets import *
 
+from config import setting
+
 from work.view.first import First
 from work.view.tool import Tool
 from work.table.table_one import TableOne
@@ -22,8 +24,8 @@ class Window(QWidget):
         self.roi_list = []
 
         # 윈도우 세팅
-        self.setWindowTitle('Test Window')
-        self.setGeometry(0, 0, 800, 540)
+        self.setWindowTitle(setting.TITLE_WINDOW)
+        self.setGeometry(0, 0, setting.WINDOW_SCREEN_WIDTH, setting.WINDOW_SCREEN_HEIGHT)
 
         # View 생성
         self.first_view = First()
@@ -48,22 +50,32 @@ class Window(QWidget):
 
         # 레이아웃 생성
         form_box = QVBoxLayout()
-        _top = QHBoxLayout()
-        _center = QHBoxLayout()
+
+        # 하위 레이아웃 생성
+        top = QHBoxLayout()
+        center = QHBoxLayout()
+        _view = QHBoxLayout()
+        _right = QHBoxLayout()
+
+        # 레이아웃 장착
+        top.addLayout(self.top_tool)
+
+        # 창 늘여도 좌측 상단 고정
+        center.setAlignment(QtCore.Qt.AlignLeft)
+        center.addLayout(_view)
+        center.addLayout(_right)
 
         # 위젯 장착
-        _top.addLayout(self.top_tool)
-        _center.addWidget(self.first_view, alignment=QtCore.Qt.AlignCenter)
-        _center.addWidget(self.img_scroll, alignment=QtCore.Qt.AlignRight)
+        _view.addWidget(self.first_view, alignment=QtCore.Qt.AlignRight)
+        _view.addWidget(self.img_scroll, alignment=QtCore.Qt.AlignLeft)
 
         # 폼박스에 레이아웃 넣기
-        form_box.addLayout(_top)
-        form_box.addLayout(_center)
+        form_box.addLayout(top)
+        form_box.addLayout(center)
 
         # 레이아웃에 폼박스 등록
         self.setLayout(form_box)
 
         # 화면에 표시
         self.show()
-
 
