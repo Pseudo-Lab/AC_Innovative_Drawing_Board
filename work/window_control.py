@@ -43,10 +43,10 @@ class WindowControl(QWidget):
         self.table_one.create(data)
         self.img_scroll.setWidget(self.table_one.top_widget)
 
-        # ui
-        self.ui_setup()
+        # ui view 실행
+        self.view_setup()
 
-    def ui_setup(self):
+    def view_setup(self):
         print('ui_setup')
 
         # 레이아웃 생성
@@ -76,5 +76,3 @@ class WindowControl(QWidget):
 
         # 레이아웃에 폼박스 등록
         self.setLayout(form_box)
-
-        self.show()
