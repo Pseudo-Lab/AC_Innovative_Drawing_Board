@@ -13,7 +13,6 @@ class WindowControl(QWidget):
     """ VIEW """
     first_view = None   # 화면에 보여지는 image VIEW 입니다.
     img_scroll = None   # 스크롤 이미지 테이블
-    top_menu = None     # 최상단 메뉴 모음
     top_tool = None     # 최상단 툴 모음
     table_one = None    # 첫번째 테이블
 
