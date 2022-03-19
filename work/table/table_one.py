@@ -23,7 +23,7 @@ class TableOne:
             push_button = QPushButton()
             push_button.setText(index)
             push_button.clicked.connect(lambda stat=False, obj=push_button: self.click_event(obj))
-            push_button.setFixedSize(170, 60)
+            push_button.setFixedSize(170, 50)
 
             # 스크롤의 가장 위에 보여질 그룹박스
             self.top_layout.addWidget(push_button, alignment=QtCore.Qt.AlignLeft)

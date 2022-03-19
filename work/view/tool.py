@@ -10,6 +10,6 @@ class Tool(QHBoxLayout):
         print('Tool: init')
 
         input_label = QLabel()
-        input_label.setText('input...')
+        input_label.setText('input..')
 
         self.addWidget(input_label)

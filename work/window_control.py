@@ -8,11 +8,12 @@ from work.view.tool import Tool
 from work.table.table_one import TableOne
 
 
-class Window(QWidget):
+class WindowControl(QWidget):
 
     """ VIEW """
     first_view = None   # 화면에 보여지는 image VIEW 입니다.
     img_scroll = None   # 스크롤 이미지 테이블
+    top_menu = None     # 최상단 메뉴 모음
     top_tool = None     # 최상단 툴 모음
     table_one = None    # 첫번째 테이블
 
@@ -52,7 +53,7 @@ class Window(QWidget):
         form_box = QVBoxLayout()
 
         # 하위 레이아웃 생성
-        top = QHBoxLayout()
+        top = QVBoxLayout()
         center = QHBoxLayout()
         _view = QHBoxLayout()
         _right = QHBoxLayout()
@@ -76,6 +77,4 @@ class Window(QWidget):
         # 레이아웃에 폼박스 등록
         self.setLayout(form_box)
 
-        # 화면에 표시
         self.show()
-
