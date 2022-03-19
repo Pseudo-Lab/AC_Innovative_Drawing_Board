@@ -7,7 +7,7 @@ from work.view.menu import Menu
 
 class Window(QMainWindow):
 
-    menu: Menu
+    menu: Menu  # 최상단 메뉴 입니다.
 
     def __init__(self):
         super(Window, self).__init__()
@@ -28,7 +28,7 @@ class Window(QMainWindow):
         exit_button.setShortcut('Ctrl+Q')
         exit_button.triggered.connect(self.close)
 
-        # Menu 버튼 등록
+        # Menu 버튼 toolbar 에 등록
         self.toolbar.addAction(self.menu.file_button)
         self.toolbar.addAction(self.menu.help_button)
         self.toolbar.addAction(exit_button)

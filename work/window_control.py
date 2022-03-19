@@ -47,7 +47,7 @@ class WindowControl(QWidget):
         self.view_setup()
 
     def view_setup(self):
-        print('ui_setup')
+        print('view_setup')
 
         # 레이아웃 생성
         form_box = QVBoxLayout()
