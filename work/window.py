@@ -7,10 +7,14 @@ from work.view.menu import Menu
 
 class Window(QMainWindow):
 
-    menu: Menu  # 최상단 메뉴 입니다.
+    window_control: WindowControl   # 윈도우 뷰 컨트롤러
+    menu: Menu                      # 최상단 메뉴 입니다.
 
     def __init__(self):
         super(Window, self).__init__()
+
+        # 윈도우 뷰 컨트롤러 생성
+        self.window_control = WindowControl()
 
         # 윈도우 메뉴 생성
         self.menu = Menu(self)
@@ -34,8 +38,7 @@ class Window(QMainWindow):
         self.toolbar.addAction(exit_button)
 
         # 윈도우 뷰 컨트롤 등록
-        window_control = WindowControl()
-        self.setCentralWidget(window_control)
+        self.setCentralWidget(self.window_control)
 
         # 윈도우 화면 시작
         self.show()
