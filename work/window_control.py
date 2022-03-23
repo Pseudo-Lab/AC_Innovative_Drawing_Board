@@ -4,7 +4,6 @@ from PySide6.QtWidgets import *
 from config import setting
 
 from work.view.first import First
-from work.view.tool import Tool
 from work.table.table_one import TableOne
 
 
@@ -13,7 +12,6 @@ class WindowControl(QWidget):
     """ VIEW """
     first_view = None   # 화면에 보여지는 image VIEW 입니다.
     img_scroll = None   # 스크롤 이미지 테이블
-    top_tool = None     # 최상단 툴 모음
     table_one = None    # 첫번째 테이블
 
     def __init__(self):
@@ -30,9 +28,6 @@ class WindowControl(QWidget):
         # View 생성
         self.first_view = First()
         self.first_view.setup()
-
-        # 최상단 툴 생성
-        self.top_tool: Tool = Tool()
 
         # 스크롤과 테이블 생성
         self.table_one = TableOne()
@@ -56,9 +51,6 @@ class WindowControl(QWidget):
         center = QHBoxLayout()
         _view = QHBoxLayout()
         _right = QHBoxLayout()
-
-        # 레이아웃 장착
-        top.addLayout(self.top_tool)
 
         # 창 늘여도 좌측 상단 고정
         center.setAlignment(QtCore.Qt.AlignLeft)

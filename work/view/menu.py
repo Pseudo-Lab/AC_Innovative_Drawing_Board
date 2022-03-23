@@ -7,7 +7,7 @@ class Menu(QMenuBar):
     call_exit = None     # 콜백 메소드: 종료 호출
     exitAction: QAction  # 종료 버튼
 
-    def __init__(self, target_obj):
+    def __init__(self):
         super().__init__()
 
         # 종료 액션 생성
