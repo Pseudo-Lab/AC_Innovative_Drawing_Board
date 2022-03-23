@@ -1,29 +1,27 @@
 from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QMenuBar
 
 
-class Menu:
+class Menu(QMenuBar):
 
-    exit_button: QAction    # 종료 버튼
-    file_button: QAction    # 파일 버튼
-    help_button: QAction    # 헬프 버튼
+    call_exit = None     # 콜백 메소드: 종료 호출
+    exitAction: QAction  # 종료 버튼
 
     def __init__(self, target_obj):
         super().__init__()
 
-        # 파일 버튼
-        self.file_button = QAction(QIcon(None), "&File", target_obj)
-        self.file_button.triggered.connect(self.file_button_click)
-        self.file_button.setCheckable(True)
+        # 종료 액션 생성
+        self.exitAction = QAction(QIcon(None), 'Exit', self)
+        self.exitAction.setShortcut('Ctrl+Q')
+        self.exitAction.setStatusTip('Exit application')
+        self.exitAction.triggered.connect(self.file_button_click)
 
-        # 헬프 버튼
-        self.help_button = QAction(QIcon(None), "&Help", target_obj)
-        self.help_button.triggered.connect(self.help_button_click)
-        self.help_button.setCheckable(True)
+        # 메뉴에 액션 등록
+        file_menu = self.addMenu('&File')
+        file_menu.addAction(self.exitAction)
 
-    # mark - Event Method
-    def file_button_click(self, s):
-        print("file_button_click", s)
-
-    # mark - Event Method
-    def help_button_click(self, s):
-        print("help_button_click", s)
+    # # mark - Event Method
+    def file_button_click(self):
+        print("Menu: file_button_click -> exit")
+        call = self.call_exit
+        call()
