@@ -10,12 +10,11 @@ class Tool(QToolBar):
         super(Tool, self).__init__(parent)
         print('Tool: init')
 
-        # 종료 액션 생성
+        # 도움 액션 생성
         self.helpAction = QAction(QIcon(None), 'help', self)
-        self.helpAction.setShortcut('Alt+h')
-        self.helpAction.setStatusTip('help application')
         self.helpAction.triggered.connect(self.help_button_click)
 
+        # 액션 등록
         self.addAction(self.helpAction)
 
     def help_button_click(self):
