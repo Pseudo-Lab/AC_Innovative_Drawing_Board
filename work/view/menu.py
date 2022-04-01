@@ -20,7 +20,7 @@ class Menu(QMenuBar):
         file_menu = self.addMenu('&File')
         file_menu.addAction(self.exitAction)
 
-    # # mark - Event Method
+    # mark - Event Method
     def file_button_click(self):
         print("Menu: file_button_click -> exit")
         call = self.call_exit
