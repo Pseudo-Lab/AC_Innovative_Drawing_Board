@@ -7,7 +7,7 @@ class First(QtWidgets.QGraphicsView):
 
     screen_rect = None  # 화면에 보여지는 이미지 사각형 크기
     draw_state = 'pen'
-
+    drawing = True
     # 기본 뷰 생성
     def __init__(self, parent=None):
         super(First, self).__init__(parent)
@@ -15,6 +15,7 @@ class First(QtWidgets.QGraphicsView):
         self.q_graphic = QtWidgets.QGraphicsPixmapItem()
         self.scene.addItem(self.q_graphic)
         self.setScene(self.scene)
+        self.lastPoint = QtCore.QPoint()
 
         # 캔버스 세팅
         canvas = QtGui.QPixmap(700, 550)
@@ -30,10 +31,19 @@ class First(QtWidgets.QGraphicsView):
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
 
     # 사용자 마우스 이벤트 처리
+    def mousePressEvent(self, e):
+        if e.button() == QtCore.Qt.LeftButton:
+            self.drawing = True
+            self.lastPoint = e.pos()
+
+    def mouseReleaseEvent(self, e):
+        if e.button == QtCore.Qt.LeftButton:
+            self.drawing = False
+
     def mouseMoveEvent(self, e):
         
         # 펜 그리기
-        if self.draw_state is 'pen':
+        if self.draw_state is 'pen' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
             print('mouseMoveEvent: pen')
 
             # 캔버스 가져오기
@@ -43,8 +53,12 @@ class First(QtWidgets.QGraphicsView):
             painter = QtGui.QPainter(canvas)
 
             # 페이트 그리기
-            painter.drawPoint(e.x(), e.y())
+            #painter.drawPoint(e.x(), e.y())
+            #painter.end()
+            painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
+            painter.drawLine(self.lastPoint, e.pos())
             painter.end()
+            self.lastPoint = e.pos()
 
             # 캔버스 업데이트
             self.q_graphic.setPixmap(canvas)
