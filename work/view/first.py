@@ -6,8 +6,10 @@ from config import setting
 class First(QtWidgets.QGraphicsView):
 
     screen_rect = None  # 화면에 보여지는 이미지 사각형 크기
-    draw_state = 'pen'
-    drawing = True
+
+    draw_state = 'pen'  # 그리기 상태
+    drawing = True      # 그리기 액션 판정
+
     # 기본 뷰 생성
     def __init__(self, parent=None):
         super(First, self).__init__(parent)
@@ -52,7 +54,7 @@ class First(QtWidgets.QGraphicsView):
             # 페인트 생성
             painter = QtGui.QPainter(canvas)
 
-            # 페이트 그리기
+            # 페인트 그리기
             #painter.drawPoint(e.x(), e.y())
             #painter.end()
             painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
@@ -70,13 +72,13 @@ class First(QtWidgets.QGraphicsView):
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()
 
-            # 지우개 세팅
+            # 지우개 생성
             rubber = QtGui.QPen()
             a: int = 10
             rubber.setWidth(a)
             rubber.setColor(QtGui.Qt.white)
 
-            # 지우개 생성
+            # 지우개 장착
             painter = QtGui.QPainter(canvas)
             painter.setPen(rubber)
             painter.drawPoint(e.x(), e.y())
