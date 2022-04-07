@@ -10,6 +10,7 @@ class Tool(QToolBar):
     call_rubber = None
     call_cut = None
     call_paint = None
+    call_ellipse = None
 
     def __init__(self, parent=None):
         super(Tool, self).__init__(parent)
@@ -23,6 +24,10 @@ class Tool(QToolBar):
         self.rubber_action = QAction(QIcon(path.UI_TOOL_RUBBER), 'rubber', self)
         self.rubber_action.triggered.connect(self.rubber_button_click)
 
+        # 타원그리기 액션 생성
+        self.ellipse_action = QAction(QIcon(path.UI_TOOL_ELLIPSE), 'ellipse', self)
+        self.ellipse_action.triggered.connect(self.ellipse_button_click)
+
         # 자르기 액션 생성
         self.cut_action = QAction(QIcon(path.UI_TOOL_CUT), 'cut', self)
         self.cut_action.triggered.connect(self.cut_button_click)
@@ -34,8 +39,10 @@ class Tool(QToolBar):
         # 액션 등록
         self.addAction(self.pen_action)
         self.addAction(self.rubber_action)
+        self.addAction(self.ellipse_action)
         self.addAction(self.cut_action)
         self.addAction(self.paint_action)
+
 
     # mark - Event call back method
     def pen_button_click(self):
@@ -48,6 +55,12 @@ class Tool(QToolBar):
         print('Tool: rubber_button_click')
         call = self.call_rubber
         call('rubber')
+
+    # mark - Event call back method
+    def ellipse_button_click(self):
+        print('Tool: ellipse_button_click')
+        call = self.call_ellipse
+        call('ellipse')
 
     # mark - Event call back method
     def cut_button_click(self):

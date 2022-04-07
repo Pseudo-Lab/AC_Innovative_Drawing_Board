@@ -51,6 +51,7 @@ class Window(QMainWindow):
         self.tool.call_rubber = self.draw_state
         self.tool.call_cut = self.draw_state
         self.tool.call_paint = self.draw_state
+        self.tool.call_ellipse = self.draw_state
 
     # mark - call back method
     def menu_app_exit(self):
