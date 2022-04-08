@@ -1,9 +1,6 @@
 from PySide6 import QtWidgets, QtCore, QtGui
 
 from config import setting
-import numpy as np
-import cv2
-#import math
 from common.algorithm.drawing_shapes import *
 
 
@@ -39,6 +36,25 @@ class First(QtWidgets.QGraphicsView):
 
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
 
+    def removePrevPoints(self):
+        # 캔버스 가져오기
+        canvas = self.q_graphic.pixmap()
+
+        # 지우개 생성
+        rubber = QtGui.QPen()
+        a: int = 10
+        rubber.setWidth(a)
+        rubber.setColor(QtGui.Qt.white)
+
+        # 지우개 장착
+        painter = QtGui.QPainter(canvas)
+        painter.setPen(rubber)
+
+        for rpoint in self.pointlist:
+            painter.drawPoint(QtCore.QPoint(rpoint[0][0], rpoint[0][1]))
+        painter.end()
+        self.q_graphic.setPixmap(canvas)
+
     # 사용자 이벤트 처리
     def userEvent(self, event):
 
@@ -65,26 +81,8 @@ class First(QtWidgets.QGraphicsView):
         self.drawing = False
 
         if self.draw_state is 'ellipse':
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
-
-            # 지우개 생성
-            rubber = QtGui.QPen()
-            a: int = 10
-            rubber.setWidth(a)
-            rubber.setColor(QtGui.Qt.white)
-
-            # 지우개 장착
-            painter = QtGui.QPainter(canvas)
-            painter.setPen(rubber)
-
-            for rpoint in self.pointlist:
-                painter.drawPoint(QtCore.QPoint(rpoint[0][0],rpoint[0][1]))
-            painter.end()
-            self.q_graphic.setPixmap(canvas)
-
+            self.removePrevPoints()
             ret = np.array(self.pointlist)
-
 
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()
@@ -111,26 +109,8 @@ class First(QtWidgets.QGraphicsView):
             self.pointlist.clear()
 
         if self.draw_state is 'circle':
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
-
-            # 지우개 생성
-            rubber = QtGui.QPen()
-            a: int = 10
-            rubber.setWidth(a)
-            rubber.setColor(QtGui.Qt.white)
-
-            # 지우개 장착
-            painter = QtGui.QPainter(canvas)
-            painter.setPen(rubber)
-
-            for rpoint in self.pointlist:
-                painter.drawPoint(QtCore.QPoint(rpoint[0][0],rpoint[0][1]))
-            painter.end()
-            self.q_graphic.setPixmap(canvas)
-
+            self.removePrevPoints()
             ret = np.array(self.pointlist)
-
 
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()
@@ -157,26 +137,8 @@ class First(QtWidgets.QGraphicsView):
             self.pointlist.clear()
 
         if self.draw_state is 'minRect':
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
-
-            # 지우개 생성
-            rubber = QtGui.QPen()
-            a: int = 10
-            rubber.setWidth(a)
-            rubber.setColor(QtGui.Qt.white)
-
-            # 지우개 장착
-            painter = QtGui.QPainter(canvas)
-            painter.setPen(rubber)
-
-            for rpoint in self.pointlist:
-                painter.drawPoint(QtCore.QPoint(rpoint[0][0],rpoint[0][1]))
-            painter.end()
-            self.q_graphic.setPixmap(canvas)
-
+            self.removePrevPoints()
             ret = np.array(self.pointlist)
-
 
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()
@@ -199,26 +161,8 @@ class First(QtWidgets.QGraphicsView):
             self.pointlist.clear()
 
         if self.draw_state is 'boundingRect':
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
-
-            # 지우개 생성
-            rubber = QtGui.QPen()
-            a: int = 10
-            rubber.setWidth(a)
-            rubber.setColor(QtGui.Qt.white)
-
-            # 지우개 장착
-            painter = QtGui.QPainter(canvas)
-            painter.setPen(rubber)
-
-            for rpoint in self.pointlist:
-                painter.drawPoint(QtCore.QPoint(rpoint[0][0],rpoint[0][1]))
-            painter.end()
-            self.q_graphic.setPixmap(canvas)
-
+            self.removePrevPoints()
             ret = np.array(self.pointlist)
-
 
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()
