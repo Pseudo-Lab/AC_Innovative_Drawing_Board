@@ -3,8 +3,8 @@ from PySide6 import QtWidgets, QtCore, QtGui
 from config import setting
 import numpy as np
 import cv2
-import math
-
+#import math
+from common.algorithm.drawing_shapes import draw_ellipse
 
 
 class First(QtWidgets.QGraphicsView):
@@ -30,31 +30,6 @@ class First(QtWidgets.QGraphicsView):
         self.canvas = QtGui.QPixmap(700, 550)
         self.canvas.fill(QtGui.Qt.white)
         self.q_graphic.setPixmap(self.canvas)
-
-    def draw_ellipse(self, ecenter, esize, erotation):
-        cx, cy = ecenter[0], ecenter[1]
-        rx, ry = esize[0], esize[1]
-        # 캔버스 가져오기
-        canvas = self.q_graphic.pixmap()
-
-        # 페인트 생성
-        painter = QtGui.QPainter(canvas)
-        painter.setPen(QtGui.QPen(QtCore.Qt.red, 1, QtCore.Qt.SolidLine))
-        for i in np.arange(0, 2 * math.pi, 0.1):
-            if i > 0:
-                x1 = cx - (ry * 0.5 * math.sin(i - 1)) * math.sin(erotation) + (rx * 0.5 * math.cos(i - 1)) * math.cos(
-                    erotation)
-                y1 = cy + (rx * 0.5 * math.cos(i - 1)) * math.sin(erotation) + (ry * 0.5 * math.sin(i - 1)) * math.cos(
-                    erotation)
-                x2 = cx - (ry * 0.5 * math.sin(i)) * math.sin(erotation) + (rx * 0.5 * math.cos(i)) * math.cos(
-                    erotation)
-                y2 = cy + (rx * 0.5 * math.cos(i)) * math.sin(erotation) + (ry * 0.5 * math.sin(i)) * math.cos(
-                    erotation)
-                first_point = QtCore.QPoint(x1, y1)
-                second_point = QtCore.QPoint(x2, y2)
-                painter.drawLine(first_point, second_point)
-        painter.end()
-        self.q_graphic.setPixmap(canvas)
 
     # 뷰 세팅
     def setup(self):
@@ -111,7 +86,27 @@ class First(QtWidgets.QGraphicsView):
             ret = np.array(self.pointlist)
             rrt = cv2.fitEllipse(ret)
 
-            self.draw_ellipse(rrt[0],rrt[1],rrt[2])
+            # 캔버스 가져오기
+            canvas = self.q_graphic.pixmap()
+
+            # 페인트 생성
+            painter = QtGui.QPainter(canvas)
+            painter.setPen(QtGui.QPen(QtCore.Qt.red, 1, QtCore.Qt.SolidLine))
+
+            # 타원 그리기
+            listofpoints = draw_ellipse(rrt[0], rrt[1], rrt[2])
+            firstPoint =  QtCore.QPoint()
+            for count, item in enumerate(listofpoints):#, start=1):
+                if count == 0:
+                    self.lastPoint = QtCore.QPoint(item[0], item[1])
+                    firstPoint = QtCore.QPoint(item[0], item[1])
+                else:
+                    painter.drawLine(self.lastPoint, QtCore.QPoint(item[0], item[1]))
+                    self.lastPoint = QtCore.QPoint(item[0], item[1])
+            painter.drawLine(self.lastPoint, firstPoint)
+            painter.end()
+
+            self.q_graphic.setPixmap(canvas)
             self.pointlist.clear()
 
     def mouseMoveEvent(self, e):
