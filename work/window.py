@@ -53,6 +53,9 @@ class Window(QMainWindow):
         self.tool.call_paint = self.draw_state
         self.tool.call_ellipse = self.draw_state
 
+        # 사용자 이벤트
+        self.tool.call_reset = self.user_event
+
     # mark - call back method
     def menu_app_exit(self):
         print('Window: menu_app_exit')
@@ -62,3 +65,8 @@ class Window(QMainWindow):
     def draw_state(self, state):
         print('Window: draw_state')
         self.window_control.first_view.draw_state = state
+
+    # mark - user event method
+    def user_event(self, event):
+        print('Window: user_event')
+        self.window_control.first_view.userEvent(event)

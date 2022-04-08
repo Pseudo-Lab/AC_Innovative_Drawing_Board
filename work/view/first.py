@@ -9,10 +9,13 @@ import math
 
 class First(QtWidgets.QGraphicsView):
 
-    screen_rect = None  # 화면에 보여지는 이미지 사각형 크기
+
     pointlist = []
-    draw_state = 'pen'  # 그리기 상태
-    drawing = True      # 그리기 액션 판정
+    screen_rect = None      # 화면에 보여지는 이미지 사각형 크기
+    canvas: QtGui.QPixmap   # 픽스맵
+    draw_state = 'pen'      # 그리기 상태
+    drawing = True          # 그리기 액션 판정
+
 
     # 기본 뷰 생성
     def __init__(self, parent=None):
@@ -24,9 +27,9 @@ class First(QtWidgets.QGraphicsView):
         self.lastPoint = QtCore.QPoint()
 
         # 캔버스 세팅
-        canvas = QtGui.QPixmap(700, 550)
-        canvas.fill(QtGui.Qt.white)
-        self.q_graphic.setPixmap(canvas)
+        self.canvas = QtGui.QPixmap(700, 550)
+        self.canvas.fill(QtGui.Qt.white)
+        self.q_graphic.setPixmap(self.canvas)
 
     def draw_ellipse(self, ecenter, esize, erotation):
         cx, cy = ecenter[0], ecenter[1]
@@ -60,6 +63,21 @@ class First(QtWidgets.QGraphicsView):
                                                         setting.VIEW_DEFAULT_HEIGHT)
 
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
+
+    # 사용자 이벤트 처리
+    def userEvent(self, event):
+
+        user_event = event
+
+        # 화면 리셋
+        if user_event is 'reset':
+            print('First: userEvent -> reset')
+
+            # 화면 채우기
+            self.canvas.fill(QtGui.Qt.white)
+
+            # 캔버스 업데이트
+            self.q_graphic.setPixmap(self.canvas)
 
     # 사용자 마우스 이벤트 처리
     def mousePressEvent(self, e):
@@ -100,13 +118,10 @@ class First(QtWidgets.QGraphicsView):
         
         # 펜 그리기
         if self.draw_state is 'pen' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
-            print('mouseMoveEvent: pen')
-
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
+            print('First: mouseMoveEvent: pen')
 
             # 페인트 생성
-            painter = QtGui.QPainter(canvas)
+            painter = QtGui.QPainter(self.canvas)
 
             # 페인트 그리기
             painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
@@ -114,14 +129,11 @@ class First(QtWidgets.QGraphicsView):
             painter.end()
             self.lastPoint = e.pos()
             # 캔버스 업데이트
-            self.q_graphic.setPixmap(canvas)
+            self.q_graphic.setPixmap(self.canvas)
 
         # 지우개
         if self.draw_state is 'rubber':
-            print('mouseMoveEvent: rubber')
-
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
+            print('First: mouseMoveEvent: rubber')
 
             # 지우개 생성
             rubber = QtGui.QPen()
@@ -130,13 +142,13 @@ class First(QtWidgets.QGraphicsView):
             rubber.setColor(QtGui.Qt.white)
 
             # 지우개 장착
-            painter = QtGui.QPainter(canvas)
+            painter = QtGui.QPainter(self.canvas)
             painter.setPen(rubber)
             painter.drawPoint(e.x(), e.y())
             painter.end()
 
             # 캔버스 업데이트
-            self.q_graphic.setPixmap(canvas)
+            self.q_graphic.setPixmap(self.canvas)
 
         if self.draw_state is 'ellipse' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
             print('mouseMoveEvent: pen')
