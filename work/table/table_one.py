@@ -1,14 +1,6 @@
 from PySide6.QtWidgets import *
 from PySide6 import QtCore
-
-
-class TableButton(QPushButton):
-    def __init__(self, btn_id, parent=None):
-        super().__init__(parent)
-        self.btn_id = btn_id
-
-    def get_button_id(self):
-        return self.btn_id
+from work.table.table_button import TableButton
 
 
 class TableOne:
