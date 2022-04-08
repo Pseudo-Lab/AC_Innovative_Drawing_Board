@@ -10,6 +10,7 @@ class Tool(QToolBar):
     call_rubber = None
     call_cut = None
     call_paint = None
+    call_reset = None
 
     def __init__(self, parent=None):
         super(Tool, self).__init__(parent)
@@ -31,11 +32,16 @@ class Tool(QToolBar):
         self.paint_action = QAction(QIcon(path.UI_TOOL_PAINT), 'paint', self)
         self.paint_action.triggered.connect(self.paint_button_click)
 
+        # 화면 갱신 액션 생성
+        self.reset_action = QAction(QIcon(path.UI_TOOL_RESET), 'reset', self)
+        self.reset_action.triggered.connect(self.reset_button_click)
+
         # 액션 등록
         self.addAction(self.pen_action)
         self.addAction(self.rubber_action)
         self.addAction(self.cut_action)
         self.addAction(self.paint_action)
+        self.addAction(self.reset_action)
 
     # mark - Event call back method
     def pen_button_click(self):
@@ -60,4 +66,10 @@ class Tool(QToolBar):
         print('Tool: paint_button_click')
         call = self.call_paint
         call('paint')
+
+    # mark - Event call back method
+    def reset_button_click(self):
+        print('Tool: reset_button_click')
+        call = self.call_reset
+        call('reset')
 

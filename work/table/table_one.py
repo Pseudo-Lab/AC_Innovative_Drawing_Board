@@ -10,6 +10,7 @@ class TableButton(QPushButton):
     def get_button_id(self):
         return self.btn_id
 
+
 class TableOne:
     top_widget = None
     top_layout = None
