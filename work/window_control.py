@@ -3,7 +3,7 @@ from PySide6.QtWidgets import *
 
 from config import setting
 
-from work.view.first import First
+from work.view.first_event_extend import First_event_extend
 from work.table.table_one import TableOne
 
 
@@ -26,7 +26,7 @@ class WindowControl(QWidget):
         self.setGeometry(0, 0, setting.WINDOW_SCREEN_WIDTH, setting.WINDOW_SCREEN_HEIGHT)
 
         # View 생성
-        self.first_view = First()
+        self.first_view = First_event_extend()
         self.first_view.setup()
 
         # 스크롤과 테이블 생성
