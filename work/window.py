@@ -52,6 +52,9 @@ class Window(QMainWindow):
         self.tool.call_cut = self.draw_state
         self.tool.call_paint = self.draw_state
         self.tool.call_ellipse = self.draw_state
+        self.tool.call_circle = self.draw_state
+        self.tool.call_rect = self.draw_state
+        self.tool.call_rotated_rect = self.draw_state
 
         # 사용자 이벤트
         self.tool.call_reset = self.user_event

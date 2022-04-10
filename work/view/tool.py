@@ -11,6 +11,9 @@ class Tool(QToolBar):
     call_cut = None
     call_paint = None
     call_ellipse = None
+    call_circle = None
+    call_rect = None
+    call_rotated_rect = None
     call_reset = None
 
 
@@ -26,9 +29,21 @@ class Tool(QToolBar):
         self.rubber_action = QAction(QIcon(path.UI_TOOL_RUBBER), 'rubber', self)
         self.rubber_action.triggered.connect(self.rubber_button_click)
 
-        # 타원그리기 액션 생성
+        # 타원 그리기 액션 생성
         self.ellipse_action = QAction(QIcon(path.UI_TOOL_ELLIPSE), 'ellipse', self)
         self.ellipse_action.triggered.connect(self.ellipse_button_click)
+
+        # 원 그리기 액션 생성
+        self.circle_action = QAction(QIcon(path.UI_TOOL_CIRCLE), 'circle', self)
+        self.circle_action.triggered.connect(self.circle_button_click)
+
+        # 사각형 그리기 액션 생성
+        self.rect_action = QAction(QIcon(path.UI_TOOL_RECT), 'rect', self)
+        self.rect_action.triggered.connect(self.rect_button_click)
+
+        # 기울어진 사각형 그리기 액션 생성
+        self.rotated_rect_action = QAction(QIcon(path.UI_TOOL_ROTATED_RECT), 'rotated_rect', self)
+        self.rotated_rect_action.triggered.connect(self.rotated_rect_button_click)
 
         # 자르기 액션 생성
         self.cut_action = QAction(QIcon(path.UI_TOOL_CUT), 'cut', self)
@@ -46,6 +61,9 @@ class Tool(QToolBar):
         self.addAction(self.pen_action)
         self.addAction(self.rubber_action)
         self.addAction(self.ellipse_action)
+        self.addAction(self.circle_action)
+        self.addAction(self.rect_action)
+        self.addAction(self.rotated_rect_action)
         self.addAction(self.cut_action)
         self.addAction(self.paint_action)
         self.addAction(self.reset_action)
@@ -68,6 +86,21 @@ class Tool(QToolBar):
         print('Tool: ellipse_button_click')
         call = self.call_ellipse
         call('ellipse')
+
+    def circle_button_click(self):
+        print('Tool: circle_button_click')
+        call = self.call_circle
+        call('circle')
+
+    def rect_button_click(self):
+        print('Tool: rect_button_click')
+        call = self.call_rect
+        call('rect')
+
+    def rotated_rect_button_click(self):
+        print('Tool: rotated_rect_button_click')
+        call = self.call_rotated_rect
+        call('rotated_rect')
 
     # mark - Event call back method
     def cut_button_click(self):

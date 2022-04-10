@@ -42,7 +42,7 @@ class First(QtWidgets.QGraphicsView):
 
         # 지우개 생성
         rubber = QtGui.QPen()
-        a: int = 10
+        a: int = 20
         rubber.setWidth(a)
         rubber.setColor(QtGui.Qt.white)
 
@@ -136,7 +136,7 @@ class First(QtWidgets.QGraphicsView):
             self.q_graphic.setPixmap(canvas)
             self.pointlist.clear()
 
-        if self.draw_state is 'minRect':
+        if self.draw_state is 'rotated_rect':
             self.removePrevPoints()
             ret = np.array(self.pointlist)
 
@@ -160,7 +160,7 @@ class First(QtWidgets.QGraphicsView):
             self.q_graphic.setPixmap(canvas)
             self.pointlist.clear()
 
-        if self.draw_state is 'boundingRect':
+        if self.draw_state is 'rect':
             self.removePrevPoints()
             ret = np.array(self.pointlist)
 
@@ -221,7 +221,7 @@ class First(QtWidgets.QGraphicsView):
             # 캔버스 업데이트
             self.q_graphic.setPixmap(self.canvas)
 
-        if self.draw_state is 'ellipse' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
+        if (self.draw_state in ['ellipse' , 'circle' , 'rect' , 'rotated_rect']) and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
             print('mouseMoveEvent: pen')
 
             # 캔버스 가져오기
