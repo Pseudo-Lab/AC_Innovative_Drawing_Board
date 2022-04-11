@@ -1,6 +1,18 @@
 from PySide6 import QtWidgets, QtGui, QtCore
 from config import setting
 
+import ctypes
+
+
+# 모니터 화면 사이즈
+def get_size():
+    user32 = ctypes.windll.user32
+    screen_width = user32.GetSystemMetrics(0)
+    screen_height = user32.GetSystemMetrics(1)
+
+    f'{screen_width}, {screen_height}'
+    return screen_width, screen_height
+
 
 class First(QtWidgets.QGraphicsView):
 
@@ -18,15 +30,17 @@ class First(QtWidgets.QGraphicsView):
         self.setScene(self.scene)
 
         # 캔버스 세팅
-        self.canvas = QtGui.QPixmap(700, 550)
+        w, h = get_size()
+        self.canvas = QtGui.QPixmap(w, h)
         self.canvas.fill(QtGui.Qt.white)
         self.q_graphic.setPixmap(self.canvas)
 
     # 뷰 세팅
     def setup(self):
+        w, h = get_size()
         self.screen_rect: QtCore.QRectF = QtCore.QRectF(0.0, 0.0,
-                                                        setting.VIEW_DEFAULT_WIDTH,
-                                                        setting.VIEW_DEFAULT_HEIGHT)
+                                                        w,
+                                                        h)
 
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
 

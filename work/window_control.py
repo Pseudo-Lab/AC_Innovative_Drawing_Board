@@ -1,8 +1,6 @@
 from PySide6 import QtCore
 from PySide6.QtWidgets import *
 
-from config import setting
-
 from work.view.first_event_extend import FirstEventExtend
 from work.table.table_one import TableOne
 
@@ -20,10 +18,6 @@ class WindowControl(QWidget):
 
         # roi 리스트 생성
         self.roi_list = []
-
-        # 윈도우 세팅
-        self.setWindowTitle(setting.TITLE_WINDOW)
-        self.setGeometry(0, 0, setting.WINDOW_SCREEN_WIDTH, setting.WINDOW_SCREEN_HEIGHT)
 
         # View 생성
         self.first_view = FirstEventExtend()

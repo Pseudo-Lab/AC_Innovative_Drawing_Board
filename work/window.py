@@ -3,6 +3,7 @@ from PySide6.QtWidgets import *
 from .window_control import WindowControl
 from work.view.menu import Menu
 from work.view.tool import Tool
+from config import setting
 
 
 class Window(QMainWindow):
@@ -13,6 +14,10 @@ class Window(QMainWindow):
 
     def __init__(self):
         super(Window, self).__init__()
+
+        # 윈도우 세팅
+        self.setWindowTitle(setting.TITLE_WINDOW)
+        self.setGeometry(0, 0, setting.WINDOW_SCREEN_WIDTH, setting.WINDOW_SCREEN_HEIGHT)
 
         # 윈도우 뷰 컨트롤러 생성
         self.window_control = WindowControl()
