@@ -59,9 +59,6 @@ class Draw:
         self.removePrevPoints()
         ret = np.array(self.pointlist)
 
-        # 캔버스 가져오기
-        canvas = self.q_graphic.pixmap()
-
         # 페인트 생성
         painter = QtGui.QPainter(self.canvas)
         painter.setPen(QtGui.QPen(QtCore.Qt.red, 1, QtCore.Qt.SolidLine))
