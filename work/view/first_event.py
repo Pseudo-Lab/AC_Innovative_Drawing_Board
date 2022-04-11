@@ -9,15 +9,15 @@ from work.view.first import First
 '''
 
 
-class First_event(First):
+class FirstEvent(First):
 
     draw: Draw                  # 그리기 객체 입니다.
     lastPoint: QtCore.QPoint    # 그리기 마지막 포인트
     pointlist: list             # 그리기 좌표를 저장 합니다.
 
     def __init__(self, parent=None):
-        super(First_event, self).__init__(parent)
-        print('First_event: init')
+        super(FirstEvent, self).__init__(parent)
+        print('FirstEvent: init')
 
         # 생성
         self.lastPoint = QtCore.QPoint()
@@ -32,14 +32,14 @@ class First_event(First):
 
     # 사용자 마우스 이벤트 처리
     def mousePressEvent(self, e):
-        print('First_event: mousePressEvent')
+        print('FirstEvent: mousePressEvent')
 
         if e.button() == QtCore.Qt.LeftButton:
             self.drawing = True
             self.draw.lastPoint = e.pos()
 
     def mouseReleaseEvent(self, e):
-        print('First_event: mouseReleaseEvent')
+        print('FirstEvent: mouseReleaseEvent')
 
         self.drawing = False
 
@@ -56,7 +56,7 @@ class First_event(First):
             self.draw.rect()
 
     def mouseMoveEvent(self, e):
-        print('First_event: mouseMoveEvent')
+        print('FirstEvent: mouseMoveEvent')
 
         # 펜 그리기
         if self.draw_state is 'pen' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
@@ -68,7 +68,7 @@ class First_event(First):
 
         if (self.draw_state in ['ellipse', 'circle', 'rect',
                                 'rotated_rect']) and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
-            print('First_event: mouseMoveEvent -> end')
+            print('FirstEvent: mouseMoveEvent -> end')
 
             # 캔버스 가져오기
             canvas = self.q_graphic.pixmap()

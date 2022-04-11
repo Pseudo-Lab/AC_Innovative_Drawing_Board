@@ -3,7 +3,7 @@ from PySide6.QtWidgets import *
 
 from config import setting
 
-from work.view.first_event_extend import First_event_extend
+from work.view.first_event_extend import FirstEventExtend
 from work.table.table_one import TableOne
 
 
@@ -16,7 +16,7 @@ class WindowControl(QWidget):
 
     def __init__(self):
         super().__init__()
-        print('Window: init')
+        print('WindowControl: init')
 
         # roi 리스트 생성
         self.roi_list = []
@@ -26,7 +26,7 @@ class WindowControl(QWidget):
         self.setGeometry(0, 0, setting.WINDOW_SCREEN_WIDTH, setting.WINDOW_SCREEN_HEIGHT)
 
         # View 생성
-        self.first_view = First_event_extend()
+        self.first_view = FirstEventExtend()
         self.first_view.setup()
 
         # 스크롤과 테이블 생성
@@ -41,7 +41,7 @@ class WindowControl(QWidget):
         self.view_setup()
 
     def view_setup(self):
-        print('view_setup')
+        print('WindowControl: view_setup')
 
         # 레이아웃 생성
         form_box = QVBoxLayout()

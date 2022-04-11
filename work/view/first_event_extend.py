@@ -1,6 +1,6 @@
 from PySide6 import QtCore, QtGui
 
-from work.view.first_event import First_event
+from work.view.first_event import FirstEvent
 
 '''
     first_event 의 
@@ -9,10 +9,10 @@ from work.view.first_event import First_event
 '''
 
 
-class First_event_extend (First_event):
+class FirstEventExtend (FirstEvent):
 
     def __init__(self, parent=None):
-        super(First_event_extend, self).__init__(parent)
+        super(FirstEventExtend, self).__init__(parent)
 
     # 사용자 이벤트 처리
     def userEvent(self, event):
@@ -21,7 +21,7 @@ class First_event_extend (First_event):
 
         # 화면 리셋
         if user_event is 'reset':
-            print('First_draw_extend: userEvent -> reset')
+            print('FirstEventExtend: userEvent -> reset')
 
             # 화면 채우기
             self.canvas.fill(QtGui.Qt.white)
