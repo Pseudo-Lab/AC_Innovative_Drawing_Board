@@ -34,9 +34,11 @@ class FirstEvent(First):
     def mousePressEvent(self, e):
         print('FirstEvent: mousePressEvent')
 
+        position = QtCore.QPoint(e.x() + self.scroll_x, e.y() + self.scroll_y)
+
         if e.button() == QtCore.Qt.LeftButton:
             self.drawing = True
-            self.draw.lastPoint = e.pos()
+            self.draw.lastPoint = position
 
     def mouseReleaseEvent(self, e):
         print('FirstEvent: mouseReleaseEvent')
@@ -58,13 +60,15 @@ class FirstEvent(First):
     def mouseMoveEvent(self, e):
         print('FirstEvent: mouseMoveEvent')
 
+        position = QtCore.QPoint(e.x() + self.scroll_x, e.y() + self.scroll_y)
+
         # 펜 그리기
         if self.draw_state is 'pen' and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
-            self.draw.pen(e)
+            self.draw.pen(position)
 
         # 지우개
         if self.draw_state is 'rubber':
-            self.draw.rubber(e)
+            self.draw.rubber(position)
 
         if (self.draw_state in ['ellipse', 'circle', 'rect',
                                 'rotated_rect']) and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
@@ -75,9 +79,9 @@ class FirstEvent(First):
 
             # 페인트 그리기
             painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
-            painter.drawLine(self.draw.lastPoint, e.pos())
+            painter.drawLine(self.draw.lastPoint, position)
             painter.end()
-            self.draw.lastPoint = e.pos()
-            self.draw.pointlist.append([[e.x(), e.y()]])
+            self.draw.lastPoint = position
+            self.draw.pointlist.append([[e.x() + self.scroll_x, e.y() + self.scroll_y]])
             # 캔버스 업데이트
             self.q_graphic.setPixmap(self.draw.canvas)

@@ -141,9 +141,9 @@ class Draw:
 
         # 페인트 그리기
         painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
-        painter.drawLine(self.lastPoint, e.pos())
+        painter.drawLine(self.lastPoint, e)
         painter.end()
-        self.lastPoint = e.pos()
+        self.lastPoint = e
         # 캔버스 업데이트
         self.q_graphic.setPixmap(self.canvas)
 
