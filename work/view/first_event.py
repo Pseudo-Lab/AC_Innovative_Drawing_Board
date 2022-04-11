@@ -34,6 +34,7 @@ class FirstEvent(First):
     def mousePressEvent(self, e):
         print('FirstEvent: mousePressEvent')
 
+        # 마우스 좌표에 스크롤 좌표 적용 위치 생성
         position = QtCore.QPoint(e.x() + self.scroll_x, e.y() + self.scroll_y)
 
         if e.button() == QtCore.Qt.LeftButton:
@@ -60,6 +61,7 @@ class FirstEvent(First):
     def mouseMoveEvent(self, e):
         print('FirstEvent: mouseMoveEvent')
 
+        # 마우스 좌표에 스크롤 좌표 적용 위치 생성
         position = QtCore.QPoint(e.x() + self.scroll_x, e.y() + self.scroll_y)
 
         # 펜 그리기

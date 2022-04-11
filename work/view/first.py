@@ -19,9 +19,9 @@ class First(QtWidgets.QGraphicsView):
     canvas: QtGui.QPixmap   # 픽스맵
     draw_state = 'pen'      # 그리기 상태
     drawing = True          # 그리기 액션 판정
-    screen_rect = None  # 화면에 보여지는 이미지 사각형 크기
-    scroll_x = None
-    scroll_y = None
+    screen_rect = None      # 화면에 보여지는 이미지 사각형 크기
+    scroll_x = None         # 스크롤 바 x 값
+    scroll_y = None         # 스크롤 바 y 값
 
     # 기본 뷰 생성
     def __init__(self, parent=None):
@@ -42,7 +42,6 @@ class First(QtWidgets.QGraphicsView):
         y_bar = self.verticalScrollBar()
         x_bar.valueChanged.connect(lambda value: self.scrolled_x(value))
         y_bar.valueChanged.connect(lambda value: self.scrolled_y(value))
-
         self.scroll_x = 0
         self.scroll_y = 0
 
@@ -52,9 +51,11 @@ class First(QtWidgets.QGraphicsView):
         self.screen_rect: QtCore.QRectF = QtCore.QRectF(0.0, 0.0, w, h)
         self.setSceneRect(QtCore.QRectF(self.screen_rect))
 
+    # 뷰 스크롤 x 이동
     def scrolled_x(self, value):
         self.scroll_x = value
 
+    # 뷰 스크롤 y 이동
     def scrolled_y(self, value):
         self.scroll_y = value
 
