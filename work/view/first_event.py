@@ -70,17 +70,14 @@ class FirstEvent(First):
                                 'rotated_rect']) and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
             print('FirstEvent: mouseMoveEvent -> end')
 
-            # 캔버스 가져오기
-            canvas = self.q_graphic.pixmap()
-
             # 페인트 생성
-            painter = QtGui.QPainter(canvas)
+            painter = QtGui.QPainter(self.draw.canvas)
 
             # 페인트 그리기
             painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
             painter.drawLine(self.draw.lastPoint, e.pos())
             painter.end()
             self.draw.lastPoint = e.pos()
-            self.pointlist.append([[e.x(), e.y()]])
+            self.draw.pointlist.append([[e.x(), e.y()]])
             # 캔버스 업데이트
-            self.q_graphic.setPixmap(canvas)
+            self.q_graphic.setPixmap(self.draw.canvas)
