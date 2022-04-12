@@ -55,7 +55,7 @@ class Window(QMainWindow):
 
     def ui_setup(self):
         """
-        Window: Register the widget show on the screen.
+        Window: Register the widget on the screen.
         """
         print(self.ui_setup.__doc__)
 
@@ -73,7 +73,7 @@ class Window(QMainWindow):
 
     def call_register(self):
         """
-        Window: call_register
+        Window: call register
         """
         print(self.call_register.__doc__)
 
