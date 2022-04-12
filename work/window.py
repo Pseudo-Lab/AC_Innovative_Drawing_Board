@@ -9,7 +9,7 @@ from config import setting
 class Window(QMainWindow):
 
     """
-    원도우 창 입니다.
+    원도우 입니다.
 
     뷰와 위젯을 생성하고 등록 합니다.
 
@@ -19,10 +19,10 @@ class Window(QMainWindow):
         tool: 최상단 툴바 입니다.
 
     Methods:
-        ui_setup: 화면에 보여줄 위젯을 생성합니다.
-        call_register: 콜백 메서드를 등록하는 메소드 입니다.
+        ui_setup: 화면에 보여줄 위젯을 등록합니다.
+        call_register: 콜백 메소드를 등록하는 메소드 입니다.
         menu_app_exit: 프로그램을 종료합니다.
-        draw_state: first 첫번째 뷰의 그리기 상태 입니다.
+        draw_state: first 뷰의 그리기 상태 입니다.
         user_event: 사용자 액션을 정의 합니다.
     """
 
