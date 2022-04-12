@@ -14,6 +14,13 @@ class Window(QMainWindow):
 
     def __init__(self):
         super(Window, self).__init__()
+        print('Window: init')
+
+        # 윈도우 메뉴 생성
+        self.menu = Menu()
+
+        # 윈도우 툴바 생성
+        self.tool = Tool()
 
         # 윈도우 세팅
         self.setWindowTitle(setting.TITLE_WINDOW)
@@ -22,12 +29,6 @@ class Window(QMainWindow):
         # 윈도우 뷰 컨트롤러 생성
         self.window_control = WindowControl()
 
-        # 윈도우 메뉴 생성
-        self.menu = Menu()
-
-        # 윈도우 툴바 생성
-        self.tool = Tool()
-
         # 콜백 메소드 등록
         self.call_register()
 
@@ -35,6 +36,11 @@ class Window(QMainWindow):
         self.ui_setup()
 
     def ui_setup(self):
+        """
+        Window: Register the widget show on the screen.
+        """
+        print(self.ui_setup.__doc__)
+
         # 메뉴 등록
         self.setMenuWidget(self.menu)
 
@@ -48,6 +54,11 @@ class Window(QMainWindow):
         self.show()
 
     def call_register(self):
+        """
+        Window: call_register
+        """
+        print(self.call_register.__doc__)
+
         # 메뉴: 종료 버튼
         self.menu.call_exit = self.menu_app_exit
 
@@ -64,17 +75,25 @@ class Window(QMainWindow):
         # 사용자 이벤트
         self.tool.call_reset = self.user_event
 
-    # mark - call back method
     def menu_app_exit(self):
-        print('Window: menu_app_exit')
+        """
+        call back method
+        """
+        print(self.menu_app_exit.__doc__)
         self.close()
 
     # mark - call back method
     def draw_state(self, state):
-        print('Window: draw_state')
+        """
+        call back method
+        """
+        print(self.draw_state.__doc__)
         self.window_control.first_view.draw_state = state
 
     # mark - user event method
     def user_event(self, event):
-        print('Window: user_event')
+        """
+        call back method
+        """
+        print(self.user_event.__doc__)
         self.window_control.first_view.userEvent(event)

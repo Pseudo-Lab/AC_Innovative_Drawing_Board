@@ -9,6 +9,7 @@ class Menu(QMenuBar):
 
     def __init__(self):
         super().__init__()
+        print('Menu: init')
 
         # 종료 액션 생성
         self.exitAction = QAction(QIcon(None), 'Exit', self)
