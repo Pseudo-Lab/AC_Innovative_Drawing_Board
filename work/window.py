@@ -82,7 +82,6 @@ class Window(QMainWindow):
         print(self.menu_app_exit.__doc__)
         self.close()
 
-    # mark - call back method
     def draw_state(self, state):
         """
         call back method
@@ -90,7 +89,6 @@ class Window(QMainWindow):
         print(self.draw_state.__doc__)
         self.window_control.first_view.draw_state = state
 
-    # mark - user event method
     def user_event(self, event):
         """
         call back method
