@@ -13,7 +13,7 @@ class Draw:
         super(Draw, self).__init__()
 
     # 좌표 지우기
-    def removePrevPoints(self):
+    def remove_prev_points(self):
 
         # 지우개 생성
         rubber = QtGui.QPen()
@@ -31,7 +31,7 @@ class Draw:
         self.q_graphic.setPixmap(self.canvas)
 
     def ellipse(self):
-        self.removePrevPoints()
+        self.remove_prev_points()
         ret = np.array(self.pointlist)
 
         # 페인트 생성
@@ -56,7 +56,7 @@ class Draw:
         self.pointlist.clear()
 
     def circle(self):
-        self.removePrevPoints()
+        self.remove_prev_points()
         ret = np.array(self.pointlist)
 
         # 페인트 생성
@@ -81,7 +81,7 @@ class Draw:
         self.pointlist.clear()
 
     def rotated_rect(self):
-        self.removePrevPoints()
+        self.remove_prev_points()
         ret = np.array(self.pointlist)
 
         # 페인트 생성
@@ -103,7 +103,7 @@ class Draw:
         self.pointlist.clear()
 
     def rect(self):
-        self.removePrevPoints()
+        self.remove_prev_points()
         ret = np.array(self.pointlist)
 
         # 페인트 생성

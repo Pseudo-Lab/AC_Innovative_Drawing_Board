@@ -1,5 +1,4 @@
 from PySide6 import QtWidgets, QtGui, QtCore
-from config import setting
 
 import ctypes
 
