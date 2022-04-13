@@ -1,12 +1,11 @@
 import tflite_runtime.interpreter as tflite
 import numpy as np
 import cv2
-import os
 
 '''PATH'''
-ROOT_DIR = os.path.abspath("")
+
 content_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/belfry.jpg'
-style_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/style.jpg'
+style_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/style1.jpg'
 style_predict_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/prediction.tflite'
 style_transform_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/transfer.tflite'
 
@@ -52,7 +51,6 @@ def run_style_transform(style_bottleneck, preprocessed_content_image):
 
 def preprocess_image(image, target_dim):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    print(image.shape)
     center = [image.shape[0] / 2 , image.shape[1] / 2]
     h = image.shape[0]
     w = image.shape[1]
@@ -63,19 +61,16 @@ def preprocess_image(image, target_dim):
     x = center[1] - w / 2
     y = center[0] - h / 2
     image = cv2.resize(image, (int(new_w), int(new_h)), interpolation=cv2.INTER_CUBIC)
-
     crop_img = image[int(y):int(y + target_dim), int(x):int(x + target_dim)]
-
     return crop_img
-
 
 content_img = cv2.imread(content_path)
 style_img = cv2.imread(style_path)
 
-content_img = preprocess_image(content_img,384)#cv2.resize(content_img, (384, 384), interpolation = cv2.INTER_CUBIC)
-style_img = preprocess_image(style_img,256)#cv2.resize(style_img,(256, 256), interpolation = cv2.INTER_CUBIC)
-cv2.imshow("content_img",content_img)
-cv2.imshow("style_img",style_img)
+content_img = preprocess_image(content_img, 384)
+style_img = preprocess_image(style_img, 256)
+cv2.imshow("content_img", content_img)
+cv2.imshow("style_img", style_img)
 cv2.waitKey(0)
 content_img = content_img.astype(np.float32)
 style_img = style_img.astype(np.float32)
@@ -94,13 +89,7 @@ stylized_image = run_style_transform(style_bottleneck, preprocessed_content_imag
 stylized_image = np.squeeze(stylized_image, axis=0)
 
 stylized_image = np.multiply(stylized_image, 255).astype(np.uint8)
-#stylized_image = stylized_image * 255.0
-#stylized_image = stylized_image.astype(np.uint8)
 
-#min_val = np.min(stylized_image)
-#max_val = np.max(stylized_image)
-
-#cv2.normalize(stylized_image,  stylized_image, 0, 255, cv2.NORM_MINMAX)
 
 stylized_image = cv2.cvtColor(stylized_image, cv2.COLOR_RGB2BGR)
 cv2.imshow("stylized_image",stylized_image)
