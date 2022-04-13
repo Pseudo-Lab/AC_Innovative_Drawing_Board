@@ -2,8 +2,7 @@ import tflite_runtime.interpreter as tflite
 import numpy as np
 import cv2
 import os
-import time
-import sys
+
 '''PATH'''
 ROOT_DIR = os.path.abspath("")
 content_path = 'C:/Users/user/PycharmProjects/AC_Innovative_Drawing_Board/resource/tflite/belfry.jpg'
@@ -52,6 +51,7 @@ def run_style_transform(style_bottleneck, preprocessed_content_image):
 # Stylize the content image using the style bottleneck.
 
 def preprocess_image(image, target_dim):
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     print(image.shape)
     center = [image.shape[0] / 2 , image.shape[1] / 2]
     h = image.shape[0]
@@ -79,7 +79,8 @@ cv2.imshow("style_img",style_img)
 cv2.waitKey(0)
 content_img = content_img.astype(np.float32)
 style_img = style_img.astype(np.float32)
-
+content_img = content_img / 255.0
+style_img = style_img / 255.0
 preprocessed_content_image = np.expand_dims(content_img, axis=0)
 preprocessed_style_image = np.expand_dims(style_img, axis=0)
 
@@ -92,12 +93,15 @@ stylized_image = run_style_transform(style_bottleneck, preprocessed_content_imag
 
 stylized_image = np.squeeze(stylized_image, axis=0)
 
-stylized_image = stylized_image * 255.0
-stylized_image = stylized_image.astype(np.uint8)
+stylized_image = np.multiply(stylized_image, 255).astype(np.uint8)
+#stylized_image = stylized_image * 255.0
+#stylized_image = stylized_image.astype(np.uint8)
 
+#min_val = np.min(stylized_image)
+#max_val = np.max(stylized_image)
 
-cv2.normalize(stylized_image,  stylized_image, 0, 255, cv2.NORM_MINMAX)
+#cv2.normalize(stylized_image,  stylized_image, 0, 255, cv2.NORM_MINMAX)
 
-
+stylized_image = cv2.cvtColor(stylized_image, cv2.COLOR_RGB2BGR)
 cv2.imshow("stylized_image",stylized_image)
 cv2.waitKey(0)
