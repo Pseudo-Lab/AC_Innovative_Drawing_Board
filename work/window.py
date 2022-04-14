@@ -1,9 +1,11 @@
 from PySide6.QtWidgets import *
-
 from .window_control import WindowControl
+
+from config import setting
 from work.view.menu import Menu
 from work.view.tool import Tool
-from config import setting
+from common.util import file_manager
+
 
 
 class Window(QMainWindow):
@@ -77,7 +79,8 @@ class Window(QMainWindow):
         """
         print(self.call_register.__doc__)
 
-        # 메뉴: 종료 버튼
+        # 메뉴
+        self.menu.call_image_load = self.menu_image_load
         self.menu.call_exit = self.menu_app_exit
 
         # 그리기 상태
@@ -99,6 +102,14 @@ class Window(QMainWindow):
         """
         print(self.menu_app_exit.__doc__)
         self.close()
+
+    def menu_image_load(self):
+        """
+        call back method
+        """
+        print(self.menu_app_exit.__doc__)
+        path = file_manager.file_open()
+        print(path)
 
     def draw_state(self, state):
         """

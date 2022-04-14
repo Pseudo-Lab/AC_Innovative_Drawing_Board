@@ -2,11 +2,11 @@ from PySide6 import QtCore, QtGui
 from common.oop.draw import Draw
 from work.view.first import First
 
-'''
+"""
     first 의 
     event 클레스 입니다. 
     Window 화면의 first view 의 mouse 이벤트가 일어나면 그리기를 합니다.
-'''
+"""
 
 
 class FirstEvent(First):
@@ -85,5 +85,6 @@ class FirstEvent(First):
             painter.end()
             self.draw.lastPoint = position
             self.draw.pointlist.append([[e.x() + self.scroll_x, e.y() + self.scroll_y]])
+
             # 캔버스 업데이트
             self.q_graphic.setPixmap(self.draw.canvas)
