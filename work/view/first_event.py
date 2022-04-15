@@ -2,14 +2,13 @@ from PySide6 import QtCore, QtGui
 from common.oop.draw import Draw
 from work.view.first import First
 
-"""
-    first 의 
-    event 클레스 입니다. 
-    Window 화면의 first view 의 mouse 이벤트가 일어나면 그리기를 합니다.
-"""
-
 
 class FirstEvent(First):
+    """
+        first 의
+        event 클레스 입니다.
+        Window 화면의 first view 의 mouse 이벤트가 일어나면 그리기를 합니다.
+    """
 
     draw: Draw                  # 그리기 객체 입니다.
     lastPoint: QtCore.QPoint    # 그리기 마지막 포인트
