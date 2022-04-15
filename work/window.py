@@ -7,25 +7,10 @@ from work.view.tool import Tool
 from common.util import file_manager
 
 
-
 class Window(QMainWindow):
-
     """
     원도우 입니다.
-
     뷰와 위젯을 생성하고 등록 합니다.
-
-    Attributes:
-        window_control: 윈도우 뷰 컨트롤러
-        menu: 최상단 메뉴 입니다.
-        tool: 최상단 툴바 입니다.
-
-    Methods:
-        ui_setup: 화면에 보여줄 위젯을 등록합니다.
-        call_register: 콜백 메소드를 등록하는 메소드 입니다.
-        menu_app_exit: 프로그램을 종료합니다.
-        draw_state: first 뷰의 그리기 상태 입니다.
-        user_event: 사용자 액션을 정의 합니다.
     """
 
     window_control: WindowControl
@@ -98,14 +83,14 @@ class Window(QMainWindow):
 
     def menu_app_exit(self):
         """
-        call back method
+        Window: menu_app_exit
         """
         print(self.menu_app_exit.__doc__)
         self.close()
 
     def menu_image_load(self):
         """
-        call back method
+        Window: menu_image_load
         """
         print(self.menu_app_exit.__doc__)
         path = file_manager.file_open()
@@ -113,14 +98,14 @@ class Window(QMainWindow):
 
     def draw_state(self, state):
         """
-        call back method
+        Window: draw_state
         """
         print(self.draw_state.__doc__)
         self.window_control.first_view.draw_state = state
 
     def user_event(self, event):
         """
-        call back method
+        Window: user_event
         """
         print(self.user_event.__doc__)
         self.window_control.first_view.userEvent(event)
