@@ -9,7 +9,7 @@ def file_open():
     result = image_file_check(file_path)
 
     if result is None:
-        notice.message('Warning', '이미지 파일을 선택을 하지 않았습니다. \n 지원 되는 형식은 jpg , png 입니다.')
+        notice.message('Warning', '이미지 파일 선택을 하지 않았습니다. \n 지원 되는 형식은 jpg , png 입니다.')
 
     else:
         return result

@@ -1,4 +1,5 @@
 from PySide6 import QtCore
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import *
 
 from work.view.first_event_extend import FirstEventExtend
@@ -6,11 +7,11 @@ from work.table.table_one import TableOne
 
 
 class WindowControl(QWidget):
-
     """ VIEW """
-    first_view = None   # 화면에 보여지는 image VIEW 입니다.
-    img_scroll = None   # 스크롤 이미지 테이블
-    table_one = None    # 첫번째 테이블
+    first_view = None       # 화면에 보여지는 image VIEW 입니다.
+    img_scroll = None       # 스크롤 이미지 테이블
+    table_one = None        # 첫번째 테이블
+    current_image: QPixmap  # 사용자 불러오기 현재 이미지
 
     def __init__(self):
         super().__init__()
@@ -61,3 +62,8 @@ class WindowControl(QWidget):
 
         # 레이아웃에 폼박스 등록
         self.setLayout(form_box)
+
+    def view_image_update(self, path):
+        print('WindowControl: view_image_update')
+        self.first_view.canvas.load(path)
+        self.first_view.repaint()

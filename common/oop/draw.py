@@ -136,6 +136,7 @@ class Draw:
         painter.drawLine(self.lastPoint, e)
         painter.end()
         self.lastPoint = e
+
         # 캔버스 업데이트
         self.q_graphic.setPixmap(self.canvas)
 

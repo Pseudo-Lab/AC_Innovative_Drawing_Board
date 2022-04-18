@@ -94,7 +94,7 @@ class Window(QMainWindow):
         """
         print(self.menu_app_exit.__doc__)
         path = file_manager.file_open()
-        print(path)
+        self.window_control.view_image_update(path)
 
     def draw_state(self, state):
         """
