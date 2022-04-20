@@ -57,8 +57,14 @@ class FirstEvent(First):
         if self.draw_state is 'rect':
             self.draw.rect()
 
+        # 가이드 씬을 숨깁니다.
+        self.guide_graphic.hide()
+
     def mouseMoveEvent(self, e):
         print('FirstEvent: mouseMoveEvent')
+
+        # 가이드 씬을 보여 줍니다.
+        self.guide_graphic.show()
 
         # 마우스 좌표에 스크롤 좌표 적용 위치 생성
         position = QtCore.QPoint(e.x() + self.scroll_x, e.y() + self.scroll_y)
@@ -71,19 +77,22 @@ class FirstEvent(First):
         if self.draw_state is 'rubber':
             self.draw.rubber(position)
 
-        if (self.draw_state in ['ellipse', 'circle', 'rect',
-                                'rotated_rect']) and e.buttons() and QtCore.Qt.LeftButton and self.drawing:
+        if (self.draw_state in ['ellipse', 'circle', 'rect','rotated_rect']) \
+                and e.buttons() \
+                and QtCore.Qt.LeftButton \
+                and self.drawing:
             print('FirstEvent: mouseMoveEvent -> end')
 
             # 페인트 생성
-            painter = QtGui.QPainter(self.draw.canvas)
+            painter = QtGui.QPainter(self.canvas_guide)
 
             # 페인트 그리기
             painter.setPen(QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine))
             painter.drawLine(self.draw.lastPoint, position)
             painter.end()
+
             self.draw.lastPoint = position
             self.draw.pointlist.append([[e.x() + self.scroll_x, e.y() + self.scroll_y]])
 
-            # 캔버스 업데이트
-            self.q_graphic.setPixmap(self.draw.canvas)
+            # 가이드씬의 캔버스 가이드 업데이트
+            self.guide_graphic.setPixmap(self.canvas_guide)
