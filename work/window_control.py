@@ -86,3 +86,9 @@ class WindowControl(QWidget):
         self.first_view.canvas.load(path)
         self.first_view.q_graphic.setPixmap(self.first_view.canvas)
         self.first_view.repaint()
+
+    def view_style_update(self, path):
+        print('WindowControl: view_style_update')
+        self.style_view.canvas.load(path)
+        self.style_view.q_graphic.setPixmap(self.style_view.canvas)
+        self.style_view.repaint()

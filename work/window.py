@@ -66,6 +66,7 @@ class Window(QMainWindow):
 
         # 메뉴
         self.menu.call_image_load = self.menu_image_load
+        self.menu.call_style_load = self.menu_style_load
         self.menu.call_exit = self.menu_app_exit
 
         # 그리기 상태
@@ -92,9 +93,18 @@ class Window(QMainWindow):
         """
         Window: menu_image_load
         """
-        print(self.menu_app_exit.__doc__)
+        print(self.menu_image_load.__doc__)
         path = file_manager.file_open()
         self.window_control.view_image_update(path)
+
+    def menu_style_load(self):
+        """
+        Window: menu_style_load
+        """
+        print(self.menu_style_load.__doc__)
+        path = file_manager.file_open()
+        self.window_control.view_style_update(path)
+
 
     def draw_state(self, state):
         """
