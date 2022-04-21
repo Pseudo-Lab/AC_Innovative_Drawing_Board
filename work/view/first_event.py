@@ -11,7 +11,7 @@ class FirstEvent(First):
         Window 화면의 first view 의 mouse 이벤트가 일어나면 그리기를 합니다.
     """
 
-    guide: Draw                  # 그리기 객체 입니다.
+    guide: Draw                 # 그리기 객체 입니다.
     shapes: Shapes              # 도형 객체 입니다.
     lastPoint: QtCore.QPoint    # 그리기 마지막 포인트
     pointlist: list             # 그리기 좌표를 저장 합니다.

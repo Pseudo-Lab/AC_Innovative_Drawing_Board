@@ -105,7 +105,6 @@ class Window(QMainWindow):
         path = file_manager.file_open()
         self.window_control.view_style_update(path)
 
-
     def draw_state(self, state):
         """
         Window: draw_state

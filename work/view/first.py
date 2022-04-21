@@ -21,6 +21,8 @@ class First(QtWidgets.QGraphicsView):
 
         # Scene 생성
         self.scene = QtWidgets.QGraphicsScene(self)
+
+        # 픽스맵 생성
         self.q_graphic = QtWidgets.QGraphicsPixmapItem()
         self.draw_graphic = QtWidgets.QGraphicsPixmapItem()
         self.guide_graphic = QtWidgets.QGraphicsPixmapItem()
@@ -52,7 +54,7 @@ class First(QtWidgets.QGraphicsView):
         self.canvas_guide.fill(color)
         self.canvas_shapes.fill(color)
 
-        # 캔버스 씬에 등록
+        # 캔버스 픽스맵 등록
         self.q_graphic.setPixmap(self.canvas)
         self.draw_graphic.setPixmap(self.canvas_draw)
         self.guide_graphic.setPixmap(self.canvas_guide)

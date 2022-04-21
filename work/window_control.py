@@ -10,11 +10,12 @@ from work.table.table_one import TableOne
 
 
 class WindowControl(QWidget):
+
     """ VIEW """
     first_view = None       # 화면에 보여지는 image VIEW 입니다.
-    style_view = None
-    result_view = None
-    reason_view = None
+    style_view = None       # 스타일 뷰
+    result_view = None      # 추론 결과 뷰
+    reason_view = None      # 추론 뷰
     img_scroll = None       # 스크롤 이미지 테이블
     table_one = None        # 첫번째 테이블
     current_image: QPixmap  # 사용자 불러오기 현재 이미지
