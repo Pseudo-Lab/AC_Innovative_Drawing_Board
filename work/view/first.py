@@ -5,7 +5,10 @@ from common.util import monitor
 class First(QtWidgets.QGraphicsView):
 
     canvas: QtGui.QPixmap           # 픽스맵
+    canvas_draw: QtGui.QPixmap      # 피스맵 그리기
     canvas_guide: QtGui.QPixmap     # 피스맵 가이드
+    canvas_shapes: QtGui.QPixmap    # 픽스맵 도형
+
     draw_state = 'pen'              # 그리기 상태
     drawing = True                  # 그리기 액션 판정
     screen_rect = None              # 화면에 보여지는 이미지 사각형 크기
@@ -19,27 +22,41 @@ class First(QtWidgets.QGraphicsView):
         # Scene 생성
         self.scene = QtWidgets.QGraphicsScene(self)
         self.q_graphic = QtWidgets.QGraphicsPixmapItem()
+        self.draw_graphic = QtWidgets.QGraphicsPixmapItem()
         self.guide_graphic = QtWidgets.QGraphicsPixmapItem()
+        self.shapes_graphic = QtWidgets.QGraphicsPixmapItem()
 
         # 씬에 픽스 맵을 추가합니다.
         self.scene.addItem(self.q_graphic)
+        self.scene.addItem(self.draw_graphic)
         self.scene.addItem(self.guide_graphic)
+        self.scene.addItem(self.shapes_graphic)
         self.setScene(self.scene)
 
         # 투명 컬러를 만듭니다.
         color = QtGui.QColor(0)
         color.setAlpha(0)
 
-        # 캔버스 세팅
+        # 모니터 사이즈
         w, h = monitor.get_size()
-        self.canvas = QtGui.QPixmap(w, h)
-        self.canvas.fill(QtGui.Qt.white)
-        self.q_graphic.setPixmap(self.canvas)
 
-        # 투명 백그라운드를 가진 캔버스 가이드를 세팅 합니다.
+        # 캔버스 세팅
+        self.canvas = QtGui.QPixmap(w, h)
+        self.canvas_draw = QtGui.QPixmap(w, h)
         self.canvas_guide = QtGui.QPixmap(w, h)
+        self.canvas_shapes = QtGui.QPixmap(w, h)
+
+        # 캔버스 배경색 채우기
+        self.canvas.fill(QtGui.Qt.white)
+        self.canvas_draw.fill(color)
         self.canvas_guide.fill(color)
+        self.canvas_shapes.fill(color)
+
+        # 캔버스 씬에 등록
+        self.q_graphic.setPixmap(self.canvas)
+        self.draw_graphic.setPixmap(self.canvas_draw)
         self.guide_graphic.setPixmap(self.canvas_guide)
+        self.shapes_graphic.setPixmap(self.canvas_shapes)
 
         # 스크롤 바 바인딩
         x_bar = self.horizontalScrollBar()

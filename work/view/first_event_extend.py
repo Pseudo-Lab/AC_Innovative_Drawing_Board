@@ -23,9 +23,19 @@ class FirstEventExtend (FirstEvent):
         if user_event is 'reset':
             print('FirstEventExtend: userEvent -> reset')
 
+            # 투명 컬러를 만듭니다.
+            color = QtGui.QColor(0)
+            color.setAlpha(0)
+
             # 화면 채우기
             self.canvas.fill(QtGui.Qt.white)
+            self.canvas_draw.fill(color)
+            self.canvas_guide.fill(color)
+            self.canvas_shapes.fill(color)
 
             # 캔버스 업데이트
             self.q_graphic.setPixmap(self.canvas)
+            self.draw_graphic.setPixmap(self.canvas_draw)
+            self.guide_graphic.setPixmap(self.canvas_guide)
+            self.shapes_graphic.setPixmap(self.canvas_shapes)
 
